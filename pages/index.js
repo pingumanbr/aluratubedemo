@@ -86,7 +86,7 @@ function HomePage() {
                     return (
                       <a href={video.url}>
                         <img src={video.thumb} />
-                        <span>
+                        <span key={video}>
                           {video.title}
                         </span>
                       </a>
