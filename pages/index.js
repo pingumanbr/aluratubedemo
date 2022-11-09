@@ -6,13 +6,23 @@ import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
 
 function HomePage() {
+  const [valorDoFiltro, setValorDoFiltro] = React.useState("");
+
     return (
     <React.Fragment>
       <CSSReset />
+      <div style={{
+                 display: "flex",
+                 flexDirection: "column",
+                 flex: 1,
+                 // backgroundColor: "red",
+             }}>
+      </div>
         <div>
-          <Menu />
+          {/* /* Prop drilling */ }
+          <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
           <Header/>
-          <Timeline playlists={config.playlists}/>
+          <Timeline searchValue={valorDoFiltro} playlists={config.playlists}/>
         </div>
     </React.Fragment>
     )
@@ -35,7 +45,6 @@ function HomePage() {
       border-radius:50%;
     }
     .user-info{
-      margin-top: 50px;
       display: flex;
       align-items: center;
       width: 100%;
@@ -44,11 +53,18 @@ function HomePage() {
     }
   `;
 
+const StyledBanner = styled.div`
+        background-color:blue;
+        background-image: url(${({bg}) => bg});
+        height: 230px;
+`;
+
+
   function Header(){
     return(
       <StyleHeader>
         {/* <img src="banner"/> */}
-
+        <StyledBanner bg={config.bg}/>
         <section className="user-info">
           <img src={`https://github.com/${config.github}.png`}/>
           <div>
@@ -60,44 +76,48 @@ function HomePage() {
               </p>
           </div>
         </section>
-
       </StyleHeader>
     )
   }
 
 
-  function Timeline(props){
-    //console.log("Dentro do Componente TimeLine", props.playlists)
-    const playListNames = Object.keys(props.playlists);
+export function Timeline({searchValue, ...propriedades}){
+//  console.log("props ",propriedades);
+  const playListNames = Object.keys(propriedades.playlists);
 
-    return(
-      <StyledTimeline>
-        {playListNames.map((playListName) => {
-          const videos = props.playlists[playListName];
-          console.log(playListName);
-          console.log(videos);
+  return(
+    <StyledTimeline>
+      {playListNames.map((playListName) => {
+        const videos = propriedades.playlists[playListName];
+        // console.log(playListName);
+        // console.log(videos);
 
-          return (
-            <section>
-              <h2>{playListName}</h2>
-              <div>
-                {
-                  videos.map((video) => {
-                    return (
-                      <a href={video.url}>
-                        <img src={video.thumb} />
-                        <span key={video}>
-                          {video.title}
-                        </span>
-                      </a>
-                    )
-                    })
-        
-                }
-              </div>
-            </section>
-          )
-        })}
-      </StyledTimeline>
-    )
-  }
+        return (
+          <section key={playListName}>
+            <h2>{playListName}</h2>
+            <div>
+              {
+                videos.filter((video) => {
+                  const titleNormalized = video.title.toLowerCase();
+                  const searchValueNormalized = video.title.toLowerCase();
+                  return titleNormalized.includes(searchValueNormalized);
+                })
+                      .map((video) => {
+                  return (
+                    <a key={video.url}  href={video.url}>
+                      <img src={video.thumb} />
+                      <span key={video}>
+                        {video.title}
+                      </span>
+                    </a>
+                  )
+                  })
+      
+              }
+            </div>
+          </section>
+        )
+      })}
+    </StyledTimeline>
+  )
+}
