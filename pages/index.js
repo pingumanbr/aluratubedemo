@@ -1,21 +1,23 @@
 import config from "./config.json";
 import styled from "styled-components";
-import { CSSReset } from "./src/components/CSSReset";
-import React from "react";
+
+import React from 'react';
 import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
 
 function HomePage() {
   const [valorDoFiltro, setValorDoFiltro] = React.useState("");
+  
+  console.log("setValorDoFiltro ---> ",setValorDoFiltro);
+  console.log("Valor do Filtro ==> ", valorDoFiltro );
 
     return (
     <React.Fragment>
-      <CSSReset />
+      
       <div style={{
                  display: "flex",
                  flexDirection: "column",
-                 flex: 1,
-                 // backgroundColor: "red",
+                 flex: 1
              }}>
       </div>
         <div>
@@ -39,6 +41,7 @@ function HomePage() {
   // }
 
   const StyleHeader = styled.div`
+    background-color: ${({ theme }) => theme.backgroundLevel1};
     img{
       width:80px;
       height: 80px;
@@ -58,7 +61,6 @@ const StyledBanner = styled.div`
         background-image: url(${({bg}) => bg});
         height: 230px;
 `;
-
 
   function Header(){
     return(
@@ -100,7 +102,7 @@ export function Timeline({searchValue, ...propriedades}){
                 videos.filter((video) => {
                   const titleNormalized = video.title.toLowerCase();
                   const searchValueNormalized = video.title.toLowerCase();
-                  return titleNormalized.includes(searchValueNormalized);
+                  return titleNormalized.includes(searchValueNormalized)
                 })
                       .map((video) => {
                   return (
@@ -110,9 +112,7 @@ export function Timeline({searchValue, ...propriedades}){
                         {video.title}
                       </span>
                     </a>
-                  )
-                  })
-      
+                  )})    
               }
             </div>
           </section>
