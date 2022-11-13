@@ -4,9 +4,41 @@ import styled from "styled-components";
 import React from 'react';
 import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
+import { videoService } from "./src/components/services/videoService";
+
 
 function HomePage() {
+  const service = videoService();
   const [valorDoFiltro, setValorDoFiltro] = React.useState("");
+  const [playlists,setPlaylists] = React.useState({});
+
+  //config.playlists
+  // const playlists = {
+  //   "jogos": []
+  // };
+
+  // Evita que o codigo se repita varias vezes, só executando quando 
+  // uma variavel seja atualizada
+  React.useEffect(() => {
+    console.log("Useffect");
+    service.getAllVideos()
+           .then((dados) => {
+              console.log(dados);
+              //Forma imutavel
+              //E feito pq o React tem que receber dado novo.
+              //Por isso foi criado esse novasPlaylists.
+              const novasPlaylists = {...playlists};  
+              dados.data.forEach((video) => { 
+                if( !novasPlaylists[video.playlist] ) {
+                  novasPlaylists[video.playlist] = [];
+                }
+                novasPlaylists[video.playlist].push(video);
+              })
+      setPlaylists(novasPlaylists);
+    });
+  }, [] )
+
+  
   
   console.log("setValorDoFiltro ---> ",setValorDoFiltro);
   console.log("Valor do Filtro ==> ", valorDoFiltro );
