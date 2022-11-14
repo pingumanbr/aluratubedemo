@@ -4,11 +4,11 @@ import styled from "styled-components";
 import React from 'react';
 import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
-import videoService from "./src/components/services/videoService";
+import  videoService, { getAllVideos }  from "./src/components/services/videoService";
 
 
 function HomePage() {
-  const service = videoService();
+  const service = getAllVideos();
   const [valorDoFiltro, setValorDoFiltro] = React.useState("");
   const [playlists,setPlaylists] = React.useState({});
 
@@ -21,7 +21,7 @@ function HomePage() {
   // uma variavel seja atualizada
   React.useEffect(() => {
     console.log("Useffect");
-    service.getAllVideos()
+    service
            .then((dados) => {
               console.log(dados);
               //Forma imutavel
@@ -100,7 +100,7 @@ const StyledBanner = styled.div`
         {/* <img src="banner"/> */}
         <StyledBanner bg={config.bg}/>
         <section className="user-info">
-          <img src={`https://github.com/${config.github}.png`}/>
+          <Image src={`https://github.com/${config.github}.png`}/>
           <div>
               <h2>
                 {config.name}
