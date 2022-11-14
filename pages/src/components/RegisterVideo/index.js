@@ -72,9 +72,6 @@ const StyledRegisterVideo = styled.div`
   }
 `;
 
-
-
-
 // get youtube video id
 // function getVideoId(url){
 //     const videoId = url.split("v=")[1];
@@ -124,7 +121,7 @@ export default function RegisterVideo(){
         initialValues: {titulo:"Frost punk", url: "https://youtube.."}
     });
 
-    const [ formVisivel, setformVisivel ] = React.useState(false);
+    const [ formVisivel, setFormVisivel ] = React.useState(false,false);
  
     /*
      ## O que precisamos para o form funcionar?
@@ -139,10 +136,11 @@ export default function RegisterVideo(){
         <React.Fragment>
         <StyledRegisterVideo>
 
-            <button type="button"className="ädd-video" onClick={() =>  setformVisivel(true)} >
-                  +
-            </button>
-            <h2>TTTTTTTTTTTTTTTTTTTTTTTTTTGGGGGGGGGGGGGGGGGGGGGGGGGGGG</h2>
+            <div>
+                    <button type="button" style={{width:'60px', height:'30px'}} className="ädd-video" onClick={() =>  setFormVisivel(true)} >
+                        +
+                    </button>
+            </div>
 
             {/* Ternario */}
             {/* Operadores de curto-circuito */}
@@ -162,11 +160,11 @@ export default function RegisterVideo(){
                         .then((oqueveio) => {console.log(oqueveio)})
                         .catch((error) => {console.log(error)})
 
-                        setformVisivel(false);
+                        setFormVisivel(false);
                         formCadastro.clearForm();
                     }}>
                         <div>
-                            <button type="button" className="close-modal" onClick={() => setformVisivel(false)}>
+                            <button type="button" className="close-modal" onClick={() => setFormVisivel(false)}>
                                 X
                             </button>
                             <input 
