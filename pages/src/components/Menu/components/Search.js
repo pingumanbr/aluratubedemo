@@ -41,6 +41,7 @@ const StyledSearch = styled.div`
 
 export default function Search({valorDoFiltro, setValorDoFiltro}) {
 //const [valorDaBusca, setValorDaBusca] = React.useState("frost");
+
 const valorDaBusca = valorDoFiltro;
 const setValorDaBusca = setValorDoFiltro;
 console.log("Search", valorDaBusca);

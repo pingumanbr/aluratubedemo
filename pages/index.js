@@ -133,7 +133,7 @@ export function Timeline({searchValue, ...propriedades}){
               {
                 videos.filter((video) => {
                   const titleNormalized = video.title.toLowerCase();
-                  const searchValueNormalized = video.title.toLowerCase();
+                  const searchValueNormalized = searchValue.toLowerCase();
                   return titleNormalized.includes(searchValueNormalized)
                 })
                       .map((video) => {
