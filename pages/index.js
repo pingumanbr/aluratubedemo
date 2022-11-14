@@ -25,7 +25,7 @@ function HomePage() {
   // uma variavel seja atualizada
   React.useEffect(() => {
     console.log("Useffect");
-    supabase.from("video").               // Tive que reinserir o codigo do videoService aqui !
+    supabase.from("video")               // Tive que reinserir o codigo do videoService aqui !
             .select("*")                  // Ao fazer o build, dava problema de export
             .then((dados) => {
               console.log(dados);
