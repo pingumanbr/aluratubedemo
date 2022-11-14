@@ -4,7 +4,7 @@ import styled from "styled-components";
 import React from 'react';
 import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
-import { videoService } from "./src/components/services/videoService";
+import videoService from "./src/components/services/videoService";
 
 
 function HomePage() {
