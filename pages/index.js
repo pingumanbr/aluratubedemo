@@ -2,6 +2,8 @@ import config from "./config.json";
 import styled from "styled-components";
 import { createClient } from "@supabase/supabase-js";
 
+import Image from 'next/image';
+
 import React from 'react';
 import Menu from "./src/components/Menu";
 import { StyledTimeline } from "./src/components/Timeline"
@@ -61,6 +63,7 @@ function HomePage() {
           {/* /* Prop drilling */ }
           <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
           <Header/>
+          
           <Timeline searchValue={valorDoFiltro} playlists={config.playlists}/>
         </div>
     </React.Fragment>
@@ -105,7 +108,7 @@ const StyledBanner = styled.div`
         {/* <img src="banner"/> */}
         <StyledBanner bg={config.bg}/>
         <section className="user-info">
-          <img src={`https://github.com/${config.github}.png`}/>
+          <img width={376} height={190} src={`https://github.com/${config.github}.png`} alt="Imagem_github"/>
           <div>
               <h2>
                 {config.name}
@@ -144,7 +147,7 @@ export function Timeline({searchValue, ...propriedades}){
                       .map((video) => {
                   return (
                     <a key={video.url}  href={video.url}>
-                      <img src={video.thumb} />
+                      <img src={video.thumb} alt="Thumbnails"/>
                       <span key={video}>
                         {video.title}
                       </span>
